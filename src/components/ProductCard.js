@@ -1,18 +1,34 @@
+import {collection, doc, getDocs} from "firebase/firestore";
+import {db} from "../util/firebaseConfig";
+import {createContext, useEffect, useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
 
+const ProductCard = ({item}) => {
+   const navigate = useNavigate();
 
-const ProductCard = () => {
-    return(
-        <div className="w-64 p-2 rounded-md" style={{border: "1px solid gray"}}>
-            <div className="w-full">
-                <img src="https://apollo.olx.in/v1/files/9eluw99gpfsz1-IN/image;s=780x0;q=60" alt="" className="w-full h-52 object-cover"/>
-                <p className="text-xl font-bold">₹ 12,0000</p>
-                <p className="text-sm">title of the product</p>
-                <div className="flex justify-between">
-                    <p>description...</p>
-                    <p>Today</p>
-                </div>
-            </div>
+   const handleProductMain = (id) => {
+    navigate(`/product/${id}`)
+   }
+  return (
+    <>
+    <div className="w-64 p-2 rounded-md shadow-2xl bg-white" onClick={() => handleProductMain(item.id)}>
+      <div className="w-full">
+        <img
+          src={item?.imageUrl}
+          alt=""
+          className="w-full h-52 object-contain"
+        />
+        <div className="">
+          <p className="text-xl font-bold">₹ {item?.price}</p>
+          <p className="text-sm">{item?.title}</p>
+          <div className="flex justify-between">
+            <p>{item?.description}</p>
+            <p>Today</p>
+          </div>
         </div>
-    )
-}
+      </div>
+    </div>
+    </>
+  );
+};
 export default ProductCard;
