@@ -33,3 +33,4 @@ export const storage = getStorage(app);
 
 
 // npm install -g firebase-tools
+// firebase login
