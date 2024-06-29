@@ -10,9 +10,10 @@ import {AuthContext} from "../context/AuthContextProvider";
 import {useNavigate} from "react-router-dom";
 import {ProductContext} from "../context/ProductContextProvider";
 import { UserContext } from "../context/UserContext";
+import { v4 as uuidv4 } from 'uuid';
 
 const AddItem = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);   
   const [imagePreview, setImagePreview] = useState(null);
   const [formData, setFormData] = useState({
     brand: "",
@@ -66,11 +67,13 @@ const AddItem = () => {
         console.log("Image uploaded successfully, URL:", imageUrl);
 
         // storing product details to collection
+        const productId = uuidv4();
         const date = new Date()
-        const docRef = await addDoc(collection(db, "products"), {
+        const docRef = await addDoc(collection(db, "products" ), {
           ...formData,
           imageUrl: imageUrl,
           userId: userData.uid,
+          productId: productId,
           date : date.toLocaleDateString()
         });
         console.log("Document added with ID:", docRef.id);
@@ -81,6 +84,7 @@ const AddItem = () => {
           ...formData,
           imageUrl,
           userId: userData.uid,
+          
         });
 
         // if success show notificatin

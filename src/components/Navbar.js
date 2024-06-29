@@ -57,8 +57,7 @@ const Navbar = () => {
             <>
               <div
                 className="flex gap-3 items-center cursor-pointer"
-                onClick={() => setOpenPopup(!openPopup)}
-                
+                onMouseEnter={() => setOpenPopup(!openPopup)}
               >
                 <span className="font-semibold text-base"> Hi {userData?.fname} </span>
                 <span className="text-3xl"><FaUserCircle/></span>
@@ -83,7 +82,7 @@ const Navbar = () => {
         </div>
       </div>
       {openPopup && (
-        <div className="absolute top-16 right-20">
+        <div className="absolute top-14 right-20">
           <UserProfile currentUser={currentUser}/>
         </div>
       )}

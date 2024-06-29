@@ -2,9 +2,12 @@ import { signOut } from "firebase/auth";
 import { auth } from "../util/firebaseConfig";
 import { SearchContext } from "../context/SearchContext";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const UserProfile = ({currentUser}) => {
   const {serachQuery, setSearchQuery} = useContext(SearchContext);
+  const wishListItem = useSelector(store => store.wishList.items)
     const handleLogout = () => {
         signOut(auth)
           .then(() => {
@@ -26,9 +29,10 @@ const UserProfile = ({currentUser}) => {
         <p className="cursor-pointer hover:bg-gray-200 p-2 rounded-md">
           PROFILE
         </p>
-        <p className="cursor-pointer hover:bg-gray-200 p-2 rounded-md">
-          WISHLIST
+        <Link to="/wishList"><p className="cursor-pointer hover:bg-gray-200 p-2 rounded-md">
+          WISHLIST {wishListItem.length}
         </p>
+        </Link>
         <p className="cursor-pointer hover:bg-gray-200 p-2 rounded-md">SELL</p>
         <p className="cursor-pointer bg-blue-500 text-center mt-3 p-2 rounded-md text-white font-bold" onClick={handleLogout}>{currentUser ? "LOGOUT" : "LOGIN"}</p>
       </div>

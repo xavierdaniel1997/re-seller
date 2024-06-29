@@ -13,23 +13,6 @@ const AuthContextProvider = ({children}) => {
   
   const [currentUser, setCurrentUser] = useState(null);
   
-
-  // const [userData, setUserData] = useState(null);
-
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, async (user) => {
-  //     if (user) {
-  //       setCurrentUser(user);
-  //       const userDoc = await getDoc(doc(db, "users", user.uid));
-  //       if (userDoc.exists()) {
-  //         setUserData(userDoc.data());
-  //       }
-  //     } else {
-  //       setCurrentUser(null);
-  //       setUserData(null);
-  //     }
-  //   });
-  // }, []);
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             setCurrentUser(user)

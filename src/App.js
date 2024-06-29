@@ -12,6 +12,9 @@ import ProtectedRoute from "./context/ProtectedRoute";
 import ProductContextProvider from "./context/ProductContextProvider";
 import UserContextProvider from "./context/UserContext";
 import SearchContextProvider from "./context/SearchContext";
+import WishList from "./pages/WishList";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 // import logContext from "./context/logContext";
 
 function App() {
@@ -44,6 +47,14 @@ function App() {
           ),
         },
         {
+          path: "/wishList",
+          element: (
+            <ProtectedRoute>
+              <WishList/>
+            </ProtectedRoute>
+          )
+        },
+        {
           path: "/product/:id",
           element: <ProductPage />,
         },
@@ -61,6 +72,7 @@ function App() {
 
   return (
     <>
+    <Provider store={store}>
       <AuthContextProvider>
         <UserContextProvider>
           <ProductContextProvider>
@@ -70,6 +82,7 @@ function App() {
           </ProductContextProvider>
         </UserContextProvider>
       </AuthContextProvider>
+      </Provider>
     </>
   );
 }
